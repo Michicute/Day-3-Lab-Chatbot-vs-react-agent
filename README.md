@@ -18,6 +18,41 @@ pip install -r requirements.txt
 ### 3. Directory Structure
 - `src/tools/`: Extension point for your custom tools.
 
+## Smart Cafe Order Agent Demo
+
+This repo now includes a simple ReAct scenario for a cafe ordering assistant.
+The agent can check menu stock, apply coupons, calculate delivery fees, and
+return the final payable total.
+
+Use OpenAI by setting `.env`:
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+DEFAULT_PROVIDER=openai
+DEFAULT_MODEL=gpt-4o-mini
+```
+
+Run the demo:
+```bash
+python3 run_cafe_agent.py
+```
+
+Then type your own prompt in the terminal. Type `exit` or `quit` to stop.
+If you press Enter without typing a prompt, the script will use the default
+demo prompt below.
+
+Example prompt:
+```text
+Toi muon mua 2 ca phe sua va 1 tra dao, dung ma GIAM10, giao toi Quan 1. Tong tien bao nhieu?
+```
+
+Expected result:
+```text
+Subtotal = 105000 VND
+Discount = 10500 VND
+Delivery = 15000 VND
+Total = 109500 VND
+```
+
 ## 🏠 Running with Local Models (CPU)
 
 If you don't want to use OpenAI or Gemini, you can run open-source models (like Phi-3) directly on your CPU using `llama-cpp-python`.
