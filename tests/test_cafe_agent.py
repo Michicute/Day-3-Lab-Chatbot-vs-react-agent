@@ -36,7 +36,7 @@ def test_cafe_tools_happy_path():
     coffee = get_menu_item("ca phe sua")
     tea = get_menu_item("tra dao")
     delivery = calc_delivery_fee("Quan 1")
-    coupon = apply_coupon("GIAM10", subtotal=105000, delivery_fee=delivery["fee"])
+    coupon = apply_coupon("GIAM10", subtotal=103000, delivery_fee=delivery["fee"])
     total = calculate_total(
         subtotal=(2 * coffee["price"]) + tea["price"],
         discount_amount=coupon["discount_amount"],
@@ -44,18 +44,31 @@ def test_cafe_tools_happy_path():
     )
 
     assert coffee["available"] is True
+    assert coffee["price"] == 29000
     assert tea["price"] == 45000
     assert delivery["fee"] == 15000
-    assert coupon["discount_amount"] == 10500
-    assert total["total"] == 109500
+    assert coupon["discount_amount"] == 10300
+    assert total["total"] == 107700
 
 
-def test_cafe_tool_out_of_stock():
-    item = get_menu_item("matcha latte")
+def test_cafe_tool_unknown_item():
+    item = get_menu_item("mon khong co")
+
+    assert item["found"] is False
+    assert item["message"] == "Item is not on the cafe menu."
+
+
+def test_cafe_tool_banh_mi_category_returns_options():
+    item = get_menu_item("banh mi")
 
     assert item["found"] is True
-    assert item["available"] is False
-    assert item["stock"] == 0
+    assert item["ambiguous"] is True
+    assert item["category"] == "BANH MI QUE"
+    assert [option["item_name"] for option in item["options"]] == [
+        "Pate",
+        "Ga Pho Mai",
+        "Bo Sot Pho Mai",
+    ]
 
 
 def test_react_agent_calls_tools_and_returns_final_answer():
@@ -64,14 +77,14 @@ def test_react_agent_calls_tools_and_returns_final_answer():
             'Thought: Need coffee price and stock.\nAction: {"tool": "get_menu_item", "args": {"item_name": "ca phe sua"}}',
             'Thought: Need tea price and stock.\nAction: {"tool": "get_menu_item", "args": {"item_name": "tra dao"}}',
             'Thought: Need delivery fee.\nAction: {"tool": "calc_delivery_fee", "args": {"district": "Quan 1"}}',
-            'Thought: Apply coupon to subtotal.\nAction: {"tool": "apply_coupon", "args": {"coupon_code": "GIAM10", "subtotal": 105000, "delivery_fee": 15000}}',
-            'Thought: Calculate the final total.\nAction: {"tool": "calculate_total", "args": {"subtotal": 105000, "discount_amount": 10500, "delivery_fee": 15000}}',
-            "Thought: I have the final total.\nFinal Answer: Tong tien la 109500 VND.",
+            'Thought: Apply coupon to subtotal.\nAction: {"tool": "apply_coupon", "args": {"coupon_code": "GIAM10", "subtotal": 103000, "delivery_fee": 15000}}',
+            'Thought: Calculate the final total.\nAction: {"tool": "calculate_total", "args": {"subtotal": 103000, "discount_amount": 10300, "delivery_fee": 15000}}',
+            "Thought: I have the final total.\nFinal Answer: Tong tien la 107700 VND.",
         ]
     )
     agent = ReActAgent(llm=fake_llm, tools=get_cafe_tools(), max_steps=8)
 
     answer = agent.run("Toi muon mua 2 ca phe sua va 1 tra dao, dung ma GIAM10, giao Quan 1.")
 
-    assert "109500" in answer
+    assert "107700" in answer
     assert len(agent.history) == 6

@@ -45,8 +45,8 @@ def main():
     )
 
     default_question = (
-        "Toi muon mua 2 ca phe sua va 1 tra dao, dung ma GIAM10, "
-        "giao toi Quan 1. Tong tien bao nhieu?"
+        "Toi muon mua 2 Phin Sua Da size nho va 1 Tra Thanh Dao size nho, "
+        "dung ma GIAM10, giao toi Quan 1. Tong tien bao nhieu?"
     )
 
     print("Smart Cafe Order Agent")

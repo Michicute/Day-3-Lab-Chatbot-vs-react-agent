@@ -38,6 +38,7 @@ Rules:
 - Use tools for menu prices, stock, coupons, delivery fees, and final totals.
 - Do not invent prices, stock, discounts, or delivery fees.
 - If an item is out of stock, unsupported, or a coupon is invalid, say so clearly.
+- If a tool observation has ambiguous=true, show the available options and ask the user to choose a specific item.
 - Use Vietnamese in the Final Answer if the user asks in Vietnamese.
 
 Output exactly one of these formats each step:

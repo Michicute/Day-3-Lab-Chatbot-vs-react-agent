@@ -42,16 +42,24 @@ demo prompt below.
 
 Example prompt:
 ```text
-Toi muon mua 2 ca phe sua va 1 tra dao, dung ma GIAM10, giao toi Quan 1. Tong tien bao nhieu?
+Toi muon mua 2 Phin Sua Da size nho va 1 Tra Thanh Dao size nho, dung ma GIAM10, giao toi Quan 1. Tong tien bao nhieu?
 ```
 
 Expected result:
 ```text
-Subtotal = 105000 VND
-Discount = 10500 VND
+Subtotal = 103000 VND
+Discount = 10300 VND
 Delivery = 15000 VND
-Total = 109500 VND
+Total = 107700 VND
 ```
+
+Run the Streamlit demo:
+```bash
+python3 -m streamlit run streamlit_app.py
+```
+
+The Streamlit app shows a menu-board layout, prompt examples, conversation
+output, and the ReAct trace for each tool-calling step.
 
 ## 🏠 Running with Local Models (CPU)
 
