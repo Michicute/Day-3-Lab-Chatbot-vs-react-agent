@@ -71,8 +71,25 @@ def css():
         """
 <style>
 div[data-testid="stAppViewContainer"] {
-    background: #f8f2e8;
-    color: #3f2c24;
+    background: #f8f2e8 !important;
+    color: #3f2c24 !important;
+}
+section[data-testid="stSidebar"] {
+    background: #3f2c24 !important;
+    border-right: 1px solid #ead9c6;
+}
+section[data-testid="stSidebar"] *,
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] div[data-testid="stMarkdownContainer"] {
+    color: #fff7ec !important;
+}
+section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
+    background: transparent !important;
 }
 .block-container {
     max-width: 1280px;
@@ -85,12 +102,22 @@ div[data-testid="stAppViewContainer"] h4,
 div[data-testid="stAppViewContainer"] p,
 div[data-testid="stAppViewContainer"] label,
 div[data-testid="stAppViewContainer"] span,
-div[data-testid="stAppViewContainer"] div[data-testid="stMarkdownContainer"] {
-    color: #3f2c24;
+div[data-testid="stAppViewContainer"] div[data-testid="stMarkdownContainer"],
+div[data-testid="stAppViewContainer"] div[data-testid="stMarkdownContainer"] * {
+    color: #3f2c24 !important;
+}
+div[data-testid="stAlert"] {
+    background: #fff7ec !important;
+    border: 1px solid #ead9c6 !important;
+    color: #3f2c24 !important;
+}
+div[data-testid="stAlert"] *,
+div[data-testid="stAlert"] p {
+    color: #3f2c24 !important;
 }
 div[data-testid="stMetric"] {
-    background: #fff7ec;
-    border: 1px solid #ead9c6;
+    background: #fff7ec !important;
+    border: 1px solid #ead9c6 !important;
     padding: 14px 16px;
 }
 div[data-testid="stMetric"] label,
@@ -98,9 +125,9 @@ div[data-testid="stMetric"] div {
     color: #3f2c24 !important;
 }
 div[data-baseweb="select"] > div {
-    background: #fffdf8;
-    border-color: #b99577;
-    color: #3f2c24;
+    background: #fffdf8 !important;
+    border-color: #b99577 !important;
+    color: #3f2c24 !important;
 }
 div[data-baseweb="select"] span,
 div[data-baseweb="select"] svg {
@@ -116,24 +143,38 @@ textarea::placeholder {
     color: #8a6b58 !important;
 }
 div[data-testid="stChatMessage"] {
-    background: #fff7ec;
-    border: 1px solid #ead9c6;
+    background: #fff7ec !important;
+    border: 1px solid #ead9c6 !important;
 }
 div[data-testid="stChatMessage"] *,
 div[data-testid="stChatMessage"] p {
     color: #3f2c24 !important;
 }
 div[data-testid="stExpander"] {
-    background: #fff7ec;
-    border: 1px solid #ead9c6;
+    background: #fff7ec !important;
+    border: 1px solid #ead9c6 !important;
 }
-div[data-testid="stExpander"] *,
-div[data-testid="stExpander"] p {
+div[data-testid="stExpander"] details,
+div[data-testid="stExpander"] summary {
+    background: #fff7ec !important;
     color: #3f2c24 !important;
 }
+div[data-testid="stExpander"] *,
+div[data-testid="stExpander"] p,
+div[data-testid="stExpander"] span,
+div[data-testid="stExpander"] svg {
+    color: #3f2c24 !important;
+    fill: #3f2c24 !important;
+}
 pre,
-code {
+code,
+div[data-testid="stCodeBlock"],
+div[data-testid="stCodeBlock"] pre,
+div[data-testid="stCodeBlock"] code {
     background: #241f20 !important;
+    color: #fff7ec !important;
+}
+div[data-testid="stCodeBlock"] span {
     color: #fff7ec !important;
 }
 button[kind="primary"] {
@@ -269,6 +310,65 @@ button * {
 }
 .trace-box code {
     white-space: pre-wrap;
+}
+/* Final overrides for Streamlit theme collisions. Keep these near the end. */
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] > div,
+div[data-testid="stSidebar"],
+div[data-testid="stSidebarContent"] {
+    background: #fff7ec !important;
+    color: #3f2c24 !important;
+}
+section[data-testid="stSidebar"] *,
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] div,
+section[data-testid="stSidebar"] div[data-testid="stMarkdownContainer"],
+section[data-testid="stSidebar"] div[data-testid="stMarkdownContainer"] *,
+div[data-testid="stSidebar"] *,
+div[data-testid="stSidebarContent"] * {
+    color: #3f2c24 !important;
+    fill: #3f2c24 !important;
+}
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3 {
+    font-weight: 900 !important;
+}
+div[data-testid="stExpander"],
+div[data-testid="stExpander"] details,
+div[data-testid="stExpander"] summary,
+div[data-testid="stExpander"] div,
+div[data-testid="stExpander"] div[role="button"] {
+    background: #fff7ec !important;
+    color: #3f2c24 !important;
+    border-color: #ead9c6 !important;
+}
+div[data-testid="stExpander"] *,
+div[data-testid="stExpander"] p,
+div[data-testid="stExpander"] span,
+div[data-testid="stExpander"] label,
+div[data-testid="stExpander"] svg,
+div[data-testid="stExpander"] div[data-testid="stMarkdownContainer"],
+div[data-testid="stExpander"] div[data-testid="stMarkdownContainer"] * {
+    color: #3f2c24 !important;
+    fill: #3f2c24 !important;
+}
+div[data-testid="stExpander"] pre,
+div[data-testid="stExpander"] code,
+div[data-testid="stExpander"] pre *,
+div[data-testid="stExpander"] code *,
+div[data-testid="stCodeBlock"],
+div[data-testid="stCodeBlock"] *,
+div[data-testid="stCodeBlock"] pre,
+div[data-testid="stCodeBlock"] code {
+    background: #241f20 !important;
+    color: #fff7ec !important;
+    fill: #fff7ec !important;
 }
 @media (max-width: 900px) {
     .menu-board {
